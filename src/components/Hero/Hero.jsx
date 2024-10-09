@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const Hero = () => {
+  const [sidebar, setSidebar] = React.useState(false)
+
   return (
     <main
       className="bg-cover bg-center bg-no-repeat min-h-[750px]"
@@ -14,7 +16,7 @@ const Hero = () => {
       <section className="relative min-h-[750px] w-full">
         <div className="container">
           {/* Navbar section */}
-          <Navbar />
+          <Navbar sidebar= {sidebar} setSidebar = {setSidebar} />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center min-h-[850px]">
             {/* text content section */}
             <div className="text-lightOrange mt-[100px] md:mt-0 p-4 space-y-28">
@@ -134,23 +136,30 @@ const Hero = () => {
           </div>
         </div>
         {/* popup section */}
-        <div className="absolute top-0 right-0 w-[140px] h-full bg-gradient-to-b from-primary/80 to-primaryDark/80 backdrop-blur-sm z-10">
-        <div className="w-full h-full flex flex-col justify-center items-center">
-          <div className="flex flex-col justify-center items-center  gap-6 text-white">
-            <div className="w-[1px] h-[70px] bg-white"></div>
-            <div className="inline-block p-2 rounded-full cursor-pointer border border-white">
-              <FaFacebookF className="text-2xl"/>
-            </div>
-            <div className="inline-block p-2 rounded-full cursor-pointer border border-white">
-              <FaTwitter className="text-2xl" />
-            </div>
-            <div className="inline-block p-2 rounded-full cursor-pointer border border-white">
-              <FaInstagram  className="text-2xl"/>
-            </div>
-            <div className="w-[1px] h-[70px] bg-white"></div>
-          </div>
-          </div>
-        </div>
+        {sidebar && (
+            <motion.div
+            initial={{x:"100%"}}
+            whileInView={{ x:0}}
+             className="absolute top-0 right-0 w-[140px] h-full bg-gradient-to-b from-primary/80 to-primaryDark/80 backdrop-blur-sm z-10">
+            <div className="w-full h-full flex flex-col justify-center items-center">
+              <div className="flex flex-col justify-center items-center  gap-6 text-white">
+                <div className="w-[1px] h-[70px] bg-white"></div>
+                <div className="inline-block p-2 rounded-full cursor-pointer border border-white">
+                  <FaFacebookF className="text-2xl"/>
+                </div>
+                <div className="inline-block p-2 rounded-full cursor-pointer border border-white">
+                  <FaTwitter className="text-2xl" />
+                </div>
+                <div className="inline-block p-2 rounded-full cursor-pointer border border-white">
+                  <FaInstagram  className="text-2xl"/>
+                </div>
+                <div className="w-[1px] h-[70px] bg-white"></div>
+              </div>
+              </div>
+            </motion.div>
+
+        )}
+      
       </section>
     </main>
   );
